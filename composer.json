@@ -1,0 +1,23 @@
+{
+	"name": "JimmyDBurrell/DOBStats",
+    "description": "Example PHP iterator using DOB stats",
+    "license": "MIT",
+    "keywords": ["dobstats"],
+    "authors": [
+        {
+            "name": "Jimmy D. Burrell",
+            "email": "jburrell@hostsignalz.com"
+        }
+    ],
+    "require": {
+		"nikic/iter": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "JimmyDBurrell\\DOBStats\\": "src"
+        }
+    }
+}
