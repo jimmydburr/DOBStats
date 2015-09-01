@@ -8,9 +8,9 @@ class ReturnsTrue {
 
 }
 
-class Returns2True {
+class GetSomeTruth {
 
-	function willReturnTrue() {
+	function getTheTruth() {
 		return true;
 	}
 
