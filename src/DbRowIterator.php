@@ -5,7 +5,7 @@
  *
  * File: Iterator/DbRowIterator.php
  */
-class DbRowIterator implements Iterator
+class DbRowIterator implements \Iterator
 {
     /** @var \PDOStatement $pdoStatement The PDO Statement to execute */
     protected $pdoStatement;
@@ -19,6 +19,7 @@ class DbRowIterator implements Iterator
     public function __construct(\PDOStatement $PDOStatement)
     {
         $this->pdoStatement = $PDOStatement;
+		$this->valid = true;
     }
 
     /**
@@ -36,8 +37,8 @@ class DbRowIterator implements Iterator
     {
         $this->key++;
         $this->result = $this->pdoStatement->fetch(
-            \PDO::FETCH_OBJ, 
-            \PDO::FETCH_ORI_ABS, 
+            \PDO::FETCH_OBJ,
+            \PDO::FETCH_ORI_ABS,
             $this->key
         );
         if (false === $this->result) {
@@ -68,5 +69,6 @@ class DbRowIterator implements Iterator
     public function rewind()
     {
         $this->key = 0;
+		$this->next();
     }
 }

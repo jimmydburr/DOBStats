@@ -1,6 +1,6 @@
 <?php namespace JimmyDBurrell\DOBStats;
 
-class LastPeriodIterator extends FilterIterator
+class LastPeriodIterator extends \FilterIterator
 {
     protected $period;
 
@@ -16,7 +16,7 @@ class LastPeriodIterator extends FilterIterator
         }
         $row = $this->getInnerIterator()->current();
         $dt = new \DateTime($this->period);
-        if ($dt->format('Y-m-d') . '00:00:00' < $row->contact_modified) {
+        if ($dt->format('Y-m-d') . '00:00:00' < $row->created_at) {
             return true;
         }
         return false;
