@@ -1,7 +1,5 @@
 <?PHP namespace JimmyDBurrell\DOBStats;
 
-date_default_timezone_set('America/Chicago');
-
 /**
 * DateDiff - a class that calculates the difference in days between
 * two dates
