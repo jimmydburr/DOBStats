@@ -10,7 +10,7 @@
 class TalleyAge
 {
     /** @var int $age The driver's age. */
-    protected $age;
+    protected $age = 0;
     /** @var array $ageData The array which holds all driver ages. */
     protected $ageData = array();
     /** @var array $ageUnder25 The array which holds driver ages under 25. */
@@ -34,10 +34,7 @@ class TalleyAge
 	}
 
 
-    /**
-     * @inheritDoc
-     */
-    public function tallyAge(int $age)
+    public function tallyAge($age)
     {
         $this->age = $age;
         $ageData [] = $age;
