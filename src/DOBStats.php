@@ -11,7 +11,7 @@ $pdo = new \PDO($dsn, DB_USER, DB_PASS);
 $beginDateTime = new \DateTime(date('Y-m-d',strtotime('-5 days')));
 $beginDate = $beginDateTime->format('Y-m-d');
 
-$sql = 'SELECT id,dob,created_at FROM app order by id desc limit 10000';
+$sql = 'SELECT id,dob,created_at FROM app where id_customer = 24 and dob != NULL order by id desc limit 10000';
 $stmt = $pdo->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_SCROLL]);
 $stmt->execute();
 
@@ -19,17 +19,9 @@ $data = new DbRowIterator($stmt);
 echo 'Getting the age and date-of-birth for drivers who applied after ' . $beginDate . PHP_EOL . '<br />';
 $lastPeriod = new LastPeriodIterator($data, $beginDate);
 
-$ageData = array();
-$ageUnder25 = array();
-$age25to34 = array();
-$age35to44 = array();
-$age45to54 = array();
-$age55to64 = array();
-$age65to74 = array();
-$age75AndOver = array();
 
 foreach ($lastPeriod as $pos => $row) {
-	if (isset($row->dob) && $row->dob > "") {
+	if ($row->dob > "") {
 		$dateDiff = new DateDiff($row->dob);
 		$age = $dateDiff->diffInYears();
 	} else {
@@ -96,37 +88,37 @@ echo sprintf(
 	$driverCountUnder25 / $driverCountTotal * 100
 ) . PHP_EOL . '<br />';
 echo sprintf(
-	'Drivers age 25 to 34 total = %d with an average age of %d. These driver represent %3.3s percent of this driver sampling.',
+	'Drivers age 25 to 34 total = %d with an average age of %d. These driver represent %3.4s percent of this driver sampling.',
 	$driverCount25to34,
 	array_sum($age25to34)/$driverCount25to34,
 	$driverCount25to34 / $driverCountTotal * 100
 ) . PHP_EOL . '<br />';
 echo sprintf(
-	'Drivers age 35 to 44 total = %d with an average age of %d. These driver represent %3.3s percent of this driver sampling.',
+	'Drivers age 35 to 44 total = %d with an average age of %d. These driver represent %3.4s percent of this driver sampling.',
 	$driverCount35to44,
 	array_sum($age35to44)/$driverCount35to44,
 	$driverCount35to44 / $driverCountTotal * 100
 ) . PHP_EOL . '<br />';
 echo sprintf(
-	'Drivers age 45 to 54 total = %d with an average age of %d. These driver represent %3.3s percent of this driver sampling.',
+	'Drivers age 45 to 54 total = %d with an average age of %d. These driver represent %3.4s percent of this driver sampling.',
 	$driverCount45to54,
 	array_sum($age45to54)/$driverCount45to54,
 	$driverCount45to54 / $driverCountTotal * 100
 ) . PHP_EOL . '<br />';
 echo sprintf(
-	'Drivers age 55 to 64 total = %d with an average age of %d. These driver represent %3.3s percent of this driver sampling.',
+	'Drivers age 55 to 64 total = %d with an average age of %d. These driver represent %3.4s percent of this driver sampling.',
 	$driverCount55to64,
 	array_sum($age55to64)/$driverCount55to64,
 	$driverCount55to64 / $driverCountTotal * 100
 ) . PHP_EOL . '<br />';
 echo sprintf(
-	'Drivers age 65 to 74 total = %d with an average age of %d. These driver represent %3.3s percent of this driver sampling.',
+	'Drivers age 65 to 74 total = %d with an average age of %d. These driver represent %3.4s percent of this driver sampling.',
 	$driverCount65to74,
 	array_sum($age65to74)/$driverCount65to74,
 	$driverCount65to74 / $driverCountTotal * 100
 ) . PHP_EOL . '<br />';
 echo sprintf(
-	'Drivers age 75 and over total = %d with an average age of %d. These driver represent %3.3s percent of this driver sampling.',
+	'Drivers age 75 and over total = %d with an average age of %d. These driver represent %3.4s percent of this driver sampling.',
 	$driverCount75AndOver,
 	array_sum($age75AndOver)/$driverCount75AndOver,
 	$driverCount75AndOver / $driverCountTotal * 100

@@ -26,12 +26,14 @@
     <Compile Include="src\DbRowIterator.php" />
     <Compile Include="src\DOBStats.php" />
     <Compile Include="src\LastPeriodIterator.php" />
+    <Compile Include="src\TalleyAge.php" />
     <Compile Include="tests\DateDiffTest.php" />
     <Compile Include=".gitignore" />
     <Compile Include="composer.json" />
     <Compile Include="composer.lock" />
     <Compile Include="composer.phar" />
     <Compile Include="phpunit.xml" />
+    <Compile Include="tests\TalleyAgeTest.php" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src" />
