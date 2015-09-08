@@ -20,11 +20,10 @@ class TalleyAge
     protected $age65to74 = array();
     protected $age75AndOver = array();
 
-    public function tallyAge($age)
+    public function calc($age)
     {
         $this->age = $age;
         $ageData [] = $age;
-        echo "array ageData count = " . count($ageData) . "\n";
         return count($ageData);
     }
 
