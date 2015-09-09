@@ -9,7 +9,7 @@ class TalleyAgeTest extends PHPUnit_Framework_TestCase
     {
         $age = 18;
 		$ageTalley = new TalleyAge();
-		$this->assertEquals(1, $ageTalley->calc($age));
+		$this->assertEquals(1, $ageTalley->record($age));
     }
 
 }

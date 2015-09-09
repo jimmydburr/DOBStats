@@ -18,50 +18,17 @@ $stmt->execute();
 $data = new DbRowIterator($stmt);
 echo 'Getting the age and date-of-birth for drivers who applied after ' . $beginDate . PHP_EOL . '<br />';
 $lastPeriod = new LastPeriodIterator($data, $beginDate);
-
+$ageTalley = new TalleyAge();
 
 foreach ($lastPeriod as $pos => $row) {
 	if ($row->dob > "") {
 		$dateDiff = new DateDiff($row->dob);
 		$age = $dateDiff->diffInYears();
+		$ageTalley->record($age);
+		$ageTalley->categorize($age);
 	} else {
 		unset($age);
 	}
-	if (isset($age) and $age < 80) {
-		$ageData [] = $age;
-        switch ($age) { 
-            case $age < 25:
-                $ageUnder25 [] = $age;
-                break;
-
-            case $age >= 25 && $age < 35:
-                $age25to34 [] = $age;
-                break;
-
-            case $age >= 35 && $age < 45:
-                $age35to44 [] = $age;
-                break;
-
-            case $age >= 45 && $age < 55:
-                $age45to54 [] = $age;
-                break;
-
-            case $age >= 55 && $age < 65:
-                $age55to64 [] = $age;
-                break;
-
-            case $age >= 65 && $age < 75:
-                $age65to74 [] = $age;
-                break;
-
-            case $age >= 75:
-                $age75AndOver [] = $age;
-                break;
-
-            default:
-                break;
-        }   // end switch
-	}   // end is (isset($age) and $age < 80)
 }   // end foreach ($lastPeriod as $row)
 
 $recordCounttotal = $pos;
