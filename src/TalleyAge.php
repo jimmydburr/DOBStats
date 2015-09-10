@@ -20,46 +20,91 @@ class TalleyAge
     protected $age65to74 = array();
     protected $age75AndOver = array();
 
-    public function record($age)
-    {
-        $this->age = $age;
-        $ageData [] = $age;
-        return count($ageData);
-    }
-
-	public function categorize($age)
+	public function countAndCategorize($age)
 	{
+        $this->age = $age;
+        $this->ageData [] = $age;
 		switch ($age) {
 			case $age < 25:
-				$ageUnder25 [] = $age;
+				$this->ageUnder25 [] = $age;
+				return true;
 				break;
 
 			case $age >= 25 && $age < 35:
-				$age25to34 [] = $age;
+				$this->age25to34 [] = $age;
+				return true;
 				break;
 
 			case $age >= 35 && $age < 45:
-				$age35to44 [] = $age;
+				$this->age35to44 [] = $age;
+				return true;
 				break;
 
 			case $age >= 45 && $age < 55:
-				$age45to54 [] = $age;
+				$this->age45to54 [] = $age;
+				return true;
 				break;
 
 			case $age >= 55 && $age < 65:
-				$age55to64 [] = $age;
+				$this->age55to64 [] = $age;
+				return true;
 				break;
 
 			case $age >= 65 && $age < 75:
-				$age65to74 [] = $age;
+				$this->age65to74 [] = $age;
+				return true;
 				break;
 
 			case $age >= 75:
-				$age75AndOver [] = $age;
+				$this->age75AndOver [] = $age;
+				return true;
 				break;
 
 			default:
+				return false;
 				break;
 		}   // end switch
-	}
+	}	// end class
+
+	public function getDriverCounts($whichArray)
+	{
+		switch ($whichArray) {
+
+			case $whichArray = "Total":
+				return count($this->ageData);
+				break;
+
+			case $whichArray = "Under25":
+				return count($this->ageUnder25);
+				break;
+
+			case $whichArray = "25to34":
+				return count($this->age25to34);
+				break;
+
+			case $whichArray = "35to44":
+				return count($this->age35to44);
+				break;
+
+			case $whichArray = "45to54":
+				return count($this->age45to54);
+				break;
+
+			case $whichArray = "55to64":
+				return count($this->age55to64);
+				break;
+
+			case $whichArray = "65to74":
+				return count($this->age65to74);
+				break;
+
+			case $whichArray = "75AndOver":
+				return count($this->age75AndOver);
+				break;
+
+			default:
+				return false;
+				break;
+		}	// end switch ($whichArray)
+	}	// end function getDriverCounts($whichArray)
 }

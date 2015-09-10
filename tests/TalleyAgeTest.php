@@ -5,11 +5,35 @@ use JimmyDBurrell\DOBStats\TalleyAge;
 class TalleyAgeTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testTalleyAgeCountEqualsOne()
+    public function testTalleyAgeCategorizeReturnsTrue()
+    {
+        $age = 48;
+		$ageTalley = new TalleyAge();
+		$this->assertEquals(true, $ageTalley->countAndCategorize($age));
+    }
+
+    public function testTalleyAgeCountAndCategorizeEqualsOneForTotalCount()
+    {
+        $age = 70;
+		$ageTalley = new TalleyAge();
+		$ageTalley->countAndCategorize($age);
+		$this->assertEquals(1, $ageTalley->getDriverCounts("Total"));
+    }
+
+    public function testTalleyAgeGetDriverCountsUnder25()
     {
         $age = 18;
 		$ageTalley = new TalleyAge();
-		$this->assertEquals(1, $ageTalley->record($age));
+		$ageTalley->countAndCategorize($age);
+		$this->assertEquals(1, $ageTalley->getDriverCounts("Under25"));
+    }
+
+    public function testTalleyAgeGetDriverCounts25to34()
+    {
+        $age = 30;
+		$ageTalley = new TalleyAge();
+		$ageTalley->countAndCategorize($age);
+		$this->assertEquals(1, $ageTalley->getDriverCounts("25to34"));
     }
 
 }
