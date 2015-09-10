@@ -9,11 +9,11 @@
 
 class StatsOutput
 {
-	protected $ageTalleyClone;
+	public $ageTalleyClone;
 
 	public function __construct($ageTalley)
 	{
-		$this->ageTalleyClone = clone $ageTalley;
+		$this->ageTalleyClone = $ageTalley;
 		return $this;
 	}
 
