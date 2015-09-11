@@ -66,90 +66,176 @@ class TalleyAge
 		}   // end switch
 	}	// end class
 
-	public function getDriverCounts($whichArray)
+	public function getDriverCounts($whichDrivers)
 	{
-		switch ($whichArray) {
+		switch ($whichDrivers) {
 
-			case $whichArray = "Total":
+			case $whichDrivers = "Total":
 				return count($this->ageData);
 				break;
 
-			case $whichArray = "Under25":
+			case $whichDrivers = "Under25":
 				return count($this->ageUnder25);
 				break;
 
-			case $whichArray = "25to34":
+			case $whichDrivers = "25to34":
 				return count($this->age25to34);
 				break;
 
-			case $whichArray = "35to44":
+			case $whichDrivers = "35to44":
 				return count($this->age35to44);
 				break;
 
-			case $whichArray = "45to54":
+			case $whichDrivers = "45to54":
 				return count($this->age45to54);
 				break;
 
-			case $whichArray = "55to64":
+			case $whichDrivers = "55to64":
 				return count($this->age55to64);
 				break;
 
-			case $whichArray = "65to74":
+			case $whichDrivers = "65to74":
 				return count($this->age65to74);
 				break;
 
-			case $whichArray = "75AndOver":
+			case $whichDrivers = "75AndOver":
 				return count($this->age75AndOver);
 				break;
 
 			default:
 				return false;
 				break;
-		}	// end switch ($whichArray)
-	}	// end function getDriverCounts($whichArray)
+		}	// end switch ($whichDrivers)
+	}	// end function getDriverCounts($whichDrivers)
 
-	public function getAverageAge($whichArray)
+	public function getAverageAge($whichDrivers)
 	{
-		switch ($whichArray) {
+		switch ($whichDrivers) {
 
-			case $whichArray = "Total":
+			case $whichDrivers = "Total":
 				$sumDriverAge = array_sum($this->ageData);
 				if ($sumDriverAge > 0) {
 					return $sumDriverAge / count($this->ageData);
+				} else {
+					return 0;
 				}
 				break;
 
-			case $whichArray = "Under25":
-				return count($this->ageUnder25);
+			case $whichDrivers = "Under25":
+				$sumDriverAge = array_sum($this->ageUnder25);
+				if ($sumDriverAge > 0) {
+					return $sumDriverAge / count($this->ageUnder25);
+				} else {
+					return 0;
+				}
 				break;
 
-			case $whichArray = "25to34":
-				return count($this->age25to34);
+			case $whichDrivers = "25to34":
+				$sumDriverAge = array_sum($this->age25to34);
+				if ($sumDriverAge > 0) {
+					return $sumDriverAge / count($this->age25to34);
+				} else {
+					return 0;
+				}
 				break;
 
-			case $whichArray = "35to44":
-				return count($this->age35to44);
+			case $whichDrivers = "35to44":
+				$sumDriverAge = array_sum($this->age35to44);
+				if ($sumDriverAge > 0) {
+					return $sumDriverAge / count($this->age35to44);
+				} else {
+					return 0;
+				}
 				break;
 
-			case $whichArray = "45to54":
-				return count($this->age45to54);
+			case $whichDrivers = "45to54":
+				$sumDriverAge = array_sum($this->age45to54);
+				if ($sumDriverAge > 0) {
+					return $sumDriverAge / count($this->age45to54);
+				} else {
+					return 0;
+				}
 				break;
 
-			case $whichArray = "55to64":
-				return count($this->age55to64);
+			case $whichDrivers = "55to64":
+				$sumDriverAge = array_sum($this->age55to64);
+				if ($sumDriverAge > 0) {
+					return $sumDriverAge / count($this->age55to64);
+				} else {
+					return 0;
+				}
 				break;
 
-			case $whichArray = "65to74":
-				return count($this->age65to74);
+			case $whichDrivers = "65to74":
+				$sumDriverAge = array_sum($this->age65to74);
+				if ($sumDriverAge > 0) {
+					return $sumDriverAge / count($this->age65to74);
+				} else {
+					return 0;
+				}
 				break;
 
-			case $whichArray = "75AndOver":
-				return count($this->age75AndOver);
+			case $whichDrivers = "75AndOver":
+				$sumDriverAge = array_sum($this->age75AndOver);
+				if ($sumDriverAge > 0) {
+					return $sumDriverAge / count($this->age75AndOver);
+				} else {
+					return 0;
+				}
 				break;
 
 			default:
 				return false;
 				break;
-		}	// end switch ($whichArray)
+		}	// end switch ($whichDrivers)
 	}	// end function getAverageAge
+	public function getPercentOfDriverCategory($whichDrivers)
+	{
+		$countDriverTotal = count($this->ageData);
+		if ($countDriverTotal > 0) {
+			switch ($whichDrivers) {
+
+				case $whichDrivers = "Under25":
+					$countDriverCategory = count($this->ageUnder25);
+					return $countDriverCategory / $countDriverTotal * 100;
+					break;
+
+				case $whichDrivers = "25to34":
+					$countDriverCategory = count($this->age25to34);
+					return $countDriverCategory / $countDriverTotal * 100;
+					break;
+
+				case $whichDrivers = "35to44":
+					$countDriverCategory = count($this->age35to44);
+					return $countDriverCategory / $countDriverTotal * 100;
+					break;
+
+				case $whichDrivers = "45to54":
+					$countDriverCategory = count($this->age45to54);
+					return $countDriverCategory / $countDriverTotal * 100;
+					break;
+
+				case $whichDrivers = "55to64":
+					$countDriverCategory = count($this->age55to64);
+					return $countDriverCategory / $countDriverTotal * 100;
+					break;
+
+				case $whichDrivers = "65to74":
+					$countDriverCategory = count($this->age65to74);
+					return $countDriverCategory / $countDriverTotal * 100;
+					break;
+
+				case $whichDrivers = "75AndOver":
+					$countDriverCategory = count($this->age75AndOver);
+					return $countDriverCategory / $countDriverTotal * 100;
+					break;
+
+				default:
+					return false;
+					break;
+			}	// end switch ($whichDrivers)
+		} else {
+			return 0;	// no drivers
+		}	// end if ($countDriverTotal > 0)
+	}
 }

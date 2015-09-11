@@ -22,14 +22,14 @@ class StatsOutput
 		echo "Using a total of $recordCounttotal database records...<br />\n";
 		echo sprintf(
 			'Average driver age is %d based on a sampling of %d drivers.',
-			array_sum($ageData)/$this->ageTalleyClone->getDriverCounts("Total"),
+			$this->ageTalleyClone->getAverageAge("Total"),
 			$this->ageTalleyClone->getDriverCounts("Total")
 			) . '<br />' . PHP_EOL;
 
 		echo sprintf(
 			'Drivers under age 25 total = %d with an average age of %d. These driver represent %3.1d percent of this driver sampling.',
-			$this->driverCountUnder25,
-			array_sum($ageUnder25)/$this->driverCountUnder25,
+			$this->ageTalleyClone->getDriverCounts("Under25"),
+			$this->ageTalleyClone->getAverageAge("Total"),
 			$this->driverCountUnder25 / $this->ageTalleyClone->getDriverCounts("Total") * 100
 		) . '<br />' . PHP_EOL;
 		echo sprintf(
