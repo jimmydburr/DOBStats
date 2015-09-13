@@ -1,27 +1,35 @@
-<?php
+<?php namespace JimmyDBurrell\DOBStats;
 
-require_once '../../db.php';
-require_once 'DbRowIterator.php';
-require_once 'LastPeriodIterator.php';
-//require_once './vendor/autoload.php';
+require_once '../db.php';
+require_once './vendor/autoload.php';
+
+date_default_timezone_set('America/Chicago');
 
 $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
-$pdo = new PDO($dsn, DB_USER, DB_PASS);
+$pdo = new \PDO($dsn, DB_USER, DB_PASS);
 
-$sql = "SELECT id,email,created_at FROM app WHERE id_customer = 24 ORDER BY id DESC limit 2500";
-$stmt = $pdo->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+$beginDateTime = new \DateTime(date('Y-m-d',strtotime('-4 days')));
+$beginDate = $beginDateTime->format('Y-m-d');
+
+$sql = 'SELECT id,dob,created_at FROM app where id_customer = 24 order by id desc limit 1000';
+$stmt = $pdo->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_SCROLL]);
 $stmt->execute();
 
 $data = new DbRowIterator($stmt);
-echo 'Getting the contacts that changed the last 2 days' . PHP_EOL;
-$lastPeriod = new LastPeriodIterator($data, '2015-09-04 00:00:00');
+echo 'Getting the age and date-of-birth for drivers who applied after ' . $beginDate . "<br />" . PHP_EOL;
+$lastPeriod = new LastPeriodIterator($data, $beginDate);
+$ageTalley = new TalleyAge();
+
 foreach ($lastPeriod as $pos => $row) {
-	echo sprintf(
-		'%d %s (%s)| modified %s',
-		$pos,
-		$row->id,
-		$row->email,
-		$row->created_at
-	) . PHP_EOL;
-}
+	if ($row->dob > "") {
+		$dateDiff = new DateDiff($row->dob);
+		$age = $dateDiff->diffInYears();
+		$ageTalley->countAndCategorize($age);
+	} else {
+		unset($age);
+	}
+}   // end foreach ($lastPeriod as $row)
+echo "Finished processing $pos driver records.<br />" . PHP_EOL;
+$output = new StatsOutput();
+$output->cliOutput($ageTalley);
 ?>
