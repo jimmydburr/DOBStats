@@ -8,10 +8,10 @@ date_default_timezone_set('America/Chicago');
 $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
 $pdo = new \PDO($dsn, DB_USER, DB_PASS);
 
-$beginDateTime = new \DateTime(date('Y-m-d',strtotime('-2 days')));
+$beginDateTime = new \DateTime(date('Y-m-d',strtotime('-4 days')));
 $beginDate = $beginDateTime->format('Y-m-d');
 
-$sql = 'SELECT id,dob,created_at FROM app where id_customer = 24 order by id desc limit 10';
+$sql = 'SELECT id,dob,created_at FROM app where id_customer = 24 order by id desc limit 1000';
 $stmt = $pdo->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_SCROLL]);
 $stmt->execute();
 
@@ -30,6 +30,6 @@ foreach ($lastPeriod as $pos => $row) {
 	}
 }   // end foreach ($lastPeriod as $row)
 echo "Finished processing $pos driver records.<br />" . PHP_EOL;
-$output = new StatsOutput($ageTalley);
-$output->cliOutput();
+$output = new StatsOutput();
+$output->cliOutput($ageTalley);
 ?>
