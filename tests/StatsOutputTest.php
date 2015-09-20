@@ -10,10 +10,6 @@ class StatsOutputTest extends PHPUnit_Framework_TestCase
         $age = 48;
 		$testCopyTalleyAge = new TalleyAge();
 		$testCopyTalleyAge->countAndCategorize($age);
-		$result = new StatsOutput($testCopyTalleyAge);
-		$this->assertEquals(
-			$testCopyTalleyAge->getDriverCounts("Total"),
-			$result->ageTalleyClone->getDriverCounts("Total")
-		);
+		$this->assertEquals(1, $testCopyTalleyAge->getDriverCounts("ageData"));
 	}
 }

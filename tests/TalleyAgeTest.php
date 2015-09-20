@@ -17,7 +17,7 @@ class TalleyAgeTest extends PHPUnit_Framework_TestCase
         $age = 70;
 		$ageTalley = new TalleyAge();
 		$ageTalley->countAndCategorize($age);
-		$this->assertEquals(1, $ageTalley->getDriverCounts("Total"));
+		$this->assertEquals(1, $ageTalley->getDriverCounts("ageData"));
     }
 
     public function testTalleyAgeGetDriverCountsUnder25()
@@ -33,7 +33,7 @@ class TalleyAgeTest extends PHPUnit_Framework_TestCase
 		$ageTalley->countAndCategorize($age);
         $age = 18;
 		$ageTalley->countAndCategorize($age);
-		$this->assertEquals(5, $ageTalley->getDriverCounts("Under25"));
+		$this->assertEquals(5, $ageTalley->getDriverCounts("ageUnder25"));
     }
 
     public function testTalleyAgeGetDriverCounts25to34()
@@ -45,7 +45,7 @@ class TalleyAgeTest extends PHPUnit_Framework_TestCase
 		$ageTalley->countAndCategorize($age);
         $age = 32;
 		$ageTalley->countAndCategorize($age);
-		$this->assertEquals(3, $ageTalley->getDriverCounts("25to34"));
+		$this->assertEquals(3, $ageTalley->getDriverCounts("age25to34"));
     }
 
     public function testTalleyAgeGetAverageAgeTotal()
@@ -57,7 +57,7 @@ class TalleyAgeTest extends PHPUnit_Framework_TestCase
 		$ageTalley->countAndCategorize($age);
         $age = 50;
 		$ageTalley->countAndCategorize($age);
-		$this->assertEquals(40, $ageTalley->getAverageAge("Total"));
+		$this->assertEquals(40, $ageTalley->getAverageAge("ageData"));
     }
 
 	public function testTalleyAgeGetAverageAge45to54()
@@ -67,13 +67,13 @@ class TalleyAgeTest extends PHPUnit_Framework_TestCase
 		$ageTalley->countAndCategorize($age);
 		$age = 50;
 		$ageTalley->countAndCategorize($age);
-		$this->assertEquals(40, $ageTalley->getAverageAge("45to54"));
+		$this->assertEquals(50, $ageTalley->getAverageAge("age45to54"));
 	}
 
     public function testTalleyAgeGetAverageAgeUnder25WithNoData()
     {
 		$ageTalley = new TalleyAge();
-		$this->assertEquals(0, $ageTalley->getAverageAge("Under25"));
+		$this->assertEquals(0, $ageTalley->getAverageAge("ageUnder25"));
     }
 
     public function testTalleyAgeGetPercentOfDriversUnder25()
@@ -83,7 +83,7 @@ class TalleyAgeTest extends PHPUnit_Framework_TestCase
 		$ageTalley->countAndCategorize($age);
 		$age = 32;
 		$ageTalley->countAndCategorize($age);
-		$this->assertEquals(50, $ageTalley->getPercentOfDriverCategory("Under25"));
+		$this->assertEquals(50, $ageTalley->getPercentOfDriverCategory("ageUnder25"));
     }
 
 }
