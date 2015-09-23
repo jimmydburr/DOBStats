@@ -11,7 +11,7 @@ $pdo = new \PDO($dsn, DB_USER, DB_PASS);
 $beginDateTime = new \DateTime(date('Y-m-d',strtotime('-4 days')));
 $beginDate = $beginDateTime->format('Y-m-d');
 
-$sql = 'SELECT id,dob,created_at FROM app where id_customer = 24 order by id desc limit 1000';
+$sql = 'SELECT id,dob,created_at FROM app where id_customer = 24 order by id desc limit 2500';
 $stmt = $pdo->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_SCROLL]);
 $stmt->execute();
 

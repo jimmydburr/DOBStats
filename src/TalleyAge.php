@@ -64,7 +64,7 @@ class TalleyAge
 				return false;
 				break;
 		}   // end switch
-	}	// end class
+	}	// end function countAndCategorize ($age)
 
 	public function getDriverCounts($whichDrivers)
 	{
@@ -238,5 +238,5 @@ class TalleyAge
 		} else {
 			return 0;	// no drivers
 		}	// end if ($countDriverTotal > 0)
-	}
+	} // end getPercentOfDriverCategory($whichDrivers)
 }
