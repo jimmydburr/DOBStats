@@ -1,7 +1,7 @@
 <?php namespace JimmyDBurrell\DOBStats;
 
-require_once '../db.php';
-require_once './vendor/autoload.php';
+require_once '../../db.php';
+require_once '../vendor/autoload.php';
 
 date_default_timezone_set('America/Chicago');
 
