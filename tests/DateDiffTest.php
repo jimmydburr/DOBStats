@@ -6,7 +6,7 @@ class DateDiffTest extends PHPUnit_Framework_TestCase
 {
 	public function testDateTimeDiff365Days()
 	{
-		$date1 = '2014-09-10';
+		$date1 = '2014-09-20';
 		$dateDiff = new DateDiff($date1);
 		$this->assertEquals(365, $dateDiff->diffInDays());
 	}
