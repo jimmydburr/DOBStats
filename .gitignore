@@ -3,3 +3,4 @@ composer.lock
 *.phpproj*
 *.sln
 .vs
+.vs/DOBStats/v14/.suo

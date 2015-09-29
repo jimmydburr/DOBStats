@@ -1,0 +1,9 @@
+/vendor
+composer.lock
+<<<<<<< HEAD
+*.phpproj*
+*.sln
+.vs
+=======
+.vs/DOBStats/v14/.suo
+>>>>>>> 1aa3069ca9083c41a7d16b2ef2904b2dbdb59268
